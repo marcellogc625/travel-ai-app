@@ -1,0 +1,14 @@
+<h1>Selecione um Roteiro para Deletar</h1>
+
+<form action="{{ path('roteiro_deletar') }}" method="POST">
+    <label for="roteiro_id">Escolha um Roteiro:</label>
+    <select name="roteiro_id" id="roteiro_id">
+        {% for roteiro in roteiros %}
+            <option value="{{ roteiro.id }}">
+                {{ roteiro.descricao }} (Criado em: {{ roteiro.data_criacao|date('d/m/Y') }})
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Deletar Roteiro</button>
+</form>

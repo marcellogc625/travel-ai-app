@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UsuarioRepository::class)]
+#[ORM\Table(name: 'usuarios')]
 class Usuario
 {
     #[ORM\Id]
@@ -28,6 +29,15 @@ class Usuario
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $data_nascimento = null;
+
+    // Construtor
+    public function __construct(string $nome, string $sobrenome, string $email, string $senha, \DateTimeImmutable $data_nascimento){
+        $this->nome = $nome;
+        $this->sobrenome = $sobrenome;
+        $this->email = $email;
+        $this->senha = $senha;
+        $this->data_nascimento = $data_nascimento;
+    }
 
     public function getId(): ?int
     {

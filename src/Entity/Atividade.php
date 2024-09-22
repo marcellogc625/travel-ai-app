@@ -1,95 +1,104 @@
 <?php
 
-namespace Tcc\TravelScriptGen\Entities;
+namespace App\Entity;
 
-class Atividade{
-    private int $id_atividade;
-    private String $nome;
-    private String $descricao;
-    private String $destino;
-    private String $categoria;
-    private float $custo_estimado;
+use App\Repository\AtividadeRepository;
+use Doctrine\ORM\Mapping as ORM;
 
-    public function __construct(int $id_atividade, String $nome, String $descricao, String $destino, String $categoria, float $custo_estimado){
-        $this -> id_atividade = $id_atividade;
+#[ORM\Entity(repositoryClass: AtividadeRepository::class)]
+#[ORM\Table(name: 'atividades')]
+class Atividade
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $nome = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $descricao = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $destino = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $categoria = null;
+
+    #[ORM\Column]
+    private ?float $custo_estimado = null;
+
+    public function __construct(String $nome, String $descricao, String $destino, String $categoria, float $custo_estimado){
         $this -> nome = $nome;
         $this -> descricao = $descricao;
         $this -> destino = $destino;
-        $this -> categoria = $categoria; 
+        $this -> categoria = $categoria;
         $this -> custo_estimado = $custo_estimado;
     }
 
-    public function getIdAtividade(): int
+    public function getId(): ?int
     {
-        return $this->id_atividade;
+        return $this->id;
     }
 
-    public function setIdAtividade(int $id_atividade): self
-    {
-        $this->id_atividade = $id_atividade;
-
-        return $this;
-    }
-
-    public function getNome(): String
+    public function getNome(): ?string
     {
         return $this->nome;
     }
 
-    public function setNome(String $nome): self
+    public function setNome(string $nome): static
     {
         $this->nome = $nome;
 
         return $this;
     }
 
-    public function getDescricao(): String
+    public function getDescricao(): ?string
     {
         return $this->descricao;
     }
 
-    public function setDescricao(String $descricao): self
+    public function setDescricao(string $descricao): static
     {
         $this->descricao = $descricao;
 
         return $this;
     }
 
-    public function getDestino(): String
+    public function getDestino(): ?string
     {
         return $this->destino;
     }
 
-    public function setDestino(String $destino): self
+    public function setDestino(string $destino): static
     {
         $this->destino = $destino;
 
         return $this;
     }
 
-    public function getCategoria(): String
+    public function getCategoria(): ?string
     {
         return $this->categoria;
     }
 
-    public function setCategoria(String $categoria): self
+    public function setCategoria(string $categoria): static
     {
         $this->categoria = $categoria;
 
         return $this;
     }
 
-    public function getCustoEstimado(): float
+    public function getCustoEstimado(): ?float
     {
         return $this->custo_estimado;
     }
 
-    public function setCustoEstimado(float $custo_estimado): self
+    public function setCustoEstimado(float $custo_estimado): static
     {
         $this->custo_estimado = $custo_estimado;
 
         return $this;
     }
 }
-
-?>

@@ -1,17 +1,35 @@
 <?php
 
-namespace Tcc\TravelScriptGen\Entities;
+namespace App\Entity;
 
-class Destino{
-    private int $id_destino;
-    private String $nome;
-    private String $pais;
-    private String $cidade;
-    private String $descricao;
-    private String $imagem;
+use App\Repository\DestinoRepository;
+use Doctrine\ORM\Mapping as ORM;
 
-    public function __construct(int $id_destino, String $nome, String $pais, String $cidade, String $descricao, String $imagem){
-        $this -> id_destino = $id_destino;
+#[ORM\Entity(repositoryClass: DestinoRepository::class)]
+#[ORM\Table(name: 'destinos')]
+class Destino
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $nome = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $pais = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $cidade = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $descricao = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $imagem = null;
+
+    public function __construct(String $nome, String $pais, String $cidade, String $descricao, String $imagem){
         $this -> nome = $nome;
         $this -> pais = $pais;
         $this -> cidade = $cidade;
@@ -19,77 +37,68 @@ class Destino{
         $this -> imagem = $imagem;
     }
 
-    public function getIdDestino(): int
+    public function getId(): ?int
     {
-        return $this->id_destino;
+        return $this->id;
     }
 
-    public function setIdDestino(int $id_destino): self
-    {
-        $this->id_destino = $id_destino;
-
-        return $this;
-    }
-
-    public function getNome(): String
+    public function getNome(): ?string
     {
         return $this->nome;
     }
 
-    public function setNome(String $nome): self
+    public function setNome(string $nome): static
     {
         $this->nome = $nome;
 
         return $this;
     }
 
-    public function getPais(): String
+    public function getPais(): ?string
     {
         return $this->pais;
     }
 
-    public function setPais(String $pais): self
+    public function setPais(string $pais): static
     {
         $this->pais = $pais;
 
         return $this;
     }
 
-    public function getCidade(): String
+    public function getCidade(): ?string
     {
         return $this->cidade;
     }
 
-    public function setCidade(String $cidade): self
+    public function setCidade(string $cidade): static
     {
         $this->cidade = $cidade;
 
         return $this;
     }
 
-    public function getDescricao(): String
+    public function getDescricao(): ?string
     {
         return $this->descricao;
     }
 
-    public function setDescricao(String $descricao): self
+    public function setDescricao(string $descricao): static
     {
         $this->descricao = $descricao;
 
         return $this;
     }
 
-    public function getImagem(): String
+    public function getImagem(): ?string
     {
         return $this->imagem;
     }
 
-    public function setImagem(String $imagem): self
+    public function setImagem(string $imagem): static
     {
         $this->imagem = $imagem;
 
         return $this;
     }
 }
-
-?>

@@ -1,81 +1,88 @@
-<?php 
+<?php
 
-namespace Tcc\TravelScriptGen\Entities;
+namespace App\Entity;
 
-class Hospedagem{
-    private int $id_hospedagem;
-    private String $nome; 
-    private String $destino;
-    private String $tipo;
-    private float $custo_noite;
+use App\Repository\HospedagemRepository;
+use Doctrine\ORM\Mapping as ORM;
 
-    public function __construct(int $id_hospedagem, String $nome, String $destino, String $tipo, float $custo_noite){
-        $this -> id_hospedagem = $id_hospedagem;
+#[ORM\Entity(repositoryClass: HospedagemRepository::class)]
+#[ORM\Table(name: 'hospedagens')]
+class Hospedagem
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $nome = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $destino = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $tipo = null;
+
+    #[ORM\Column]
+    private ?float $custo_por_noite = null;
+
+    public function __construct(String $nome, String $destino, String $tipo, float $custo_por_noite){
         $this -> nome = $nome;
         $this -> destino = $destino;
         $this -> tipo = $tipo;
-        $this -> $custo_noite = $custo_noite;
+        $this -> custo_por_noite = $custo_por_noite;
     }
 
-    public function getIdHospedagem(): int
+    public function getId(): ?int
     {
-        return $this->id_hospedagem;
+        return $this->id;
     }
 
-    public function setIdHospedagem(int $id_hospedagem): self
-    {
-        $this->id_hospedagem = $id_hospedagem;
-
-        return $this;
-    }
-
-    public function getNome(): String
+    public function getNome(): ?string
     {
         return $this->nome;
     }
 
-    public function setNome(String $nome): self
+    public function setNome(string $nome): static
     {
         $this->nome = $nome;
 
         return $this;
     }
 
-    public function getDestino(): String
+    public function getDestino(): ?string
     {
         return $this->destino;
     }
 
-    public function setDestino(String $destino): self
+    public function setDestino(string $destino): static
     {
         $this->destino = $destino;
 
         return $this;
     }
 
-    public function getTipo(): String
+    public function getTipo(): ?string
     {
         return $this->tipo;
     }
 
-    public function setTipo(String $tipo): self
+    public function setTipo(string $tipo): static
     {
         $this->tipo = $tipo;
 
         return $this;
     }
 
-    public function getCustoNoite(): float
+    public function getCustoPorNoite(): ?float
     {
-        return $this->custo_noite;
+        return $this->custo_por_noite;
     }
 
-    public function setCustoNoite(float $custo_noite): self
+    public function setCustoPorNoite(float $custo_por_noite): static
     {
-        $this->custo_noite = $custo_noite;
+        $this->custo_por_noite = $custo_por_noite;
 
         return $this;
     }
 }
-
-?>

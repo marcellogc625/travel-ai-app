@@ -1,20 +1,43 @@
 <?php
 
-namespace Tcc\TravelScriptGen\Entities;
+namespace App\Entity;
 
-class Perfil{
+use App\Repository\PerfilRepository;
+use Doctrine\ORM\Mapping as ORM;
 
-    private int $id_perfil;
-    private int $id_usuario;
-    private int $interesse_aventura;
-    private int $interesse_cultura;
-    private int $interesse_gastronomia;
-    private float $orcamento_diario;
-    private int $duracao_viagem;
-    private String $outros_interesses;
+#[ORM\Entity(repositoryClass: PerfilRepository::class)]
+#[ORM\Table(name: 'perfis')]
+class Perfil
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    public function __construct(int $id_perfil, int $id_usuario, int $interesse_aventura, int $interesse_cultura, int $interesse_gastronomia, float $orcamento_diario, int $duracao_viagem, String $outros_interesses){
-        $this -> id_perfil = $id_perfil;
+    #[ORM\Column]
+    #[ORM\OneToOne(targetEntity: Usuario::class)]
+    #[ORM\JoinColumn(name: 'id_usuario', referencedColumnName: 'id', nullable: false)]
+    private ?int $id_usuario = null;
+
+    #[ORM\Column]
+    private ?int $interesse_aventura = null;
+
+    #[ORM\Column]
+    private ?int $interesse_cultura = null;
+
+    #[ORM\Column]
+    private ?int $interesse_gastronomia = null;
+
+    #[ORM\Column]
+    private ?float $orcamento_diario = null;
+
+    #[ORM\Column]
+    private ?int $duracao_viagem = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $outros_interesses = null;
+
+    public function __construct(int $id_usuario, int $interesse_aventura, int $interesse_cultura, int $interesse_gastronomia, float $orcamento_diario, int $duracao_viagem, String $outros_interesses){
         $this -> id_usuario = $id_usuario;
         $this -> interesse_aventura = $interesse_aventura;
         $this -> interesse_cultura = $interesse_cultura;
@@ -24,102 +47,92 @@ class Perfil{
         $this -> outros_interesses = $outros_interesses;
     }
 
-    public function getIdPerfil(): int
+    public function getId(): ?int
     {
-        return $this->id_perfil;
+        return $this->id;
     }
 
-    public function setIdPerfil(int $id_perfil): self
-    {
-        $this->id_perfil = $id_perfil;
-
-        return $this;
-    }
-
-    public function getIdUsuario(): int
+    public function getIdUsuario(): ?int
     {
         return $this->id_usuario;
     }
 
-    public function setIdUsuario(int $id_usuario): self
+    public function setIdUsuario(int $id_usuario): static
     {
         $this->id_usuario = $id_usuario;
 
         return $this;
     }
 
-    public function getInteresseAventura(): int
+    public function getInteresseAventura(): ?int
     {
         return $this->interesse_aventura;
     }
 
-    public function setInteresseAventura(int $interesse_aventura): self
+    public function setInteresseAventura(int $interesse_aventura): static
     {
         $this->interesse_aventura = $interesse_aventura;
 
         return $this;
     }
 
-    public function getInteresseCultura(): int
+    public function getInteresseCultura(): ?int
     {
         return $this->interesse_cultura;
     }
 
-    public function setInteresseCultura(int $interesse_cultura): self
+    public function setInteresseCultura(int $interesse_cultura): static
     {
         $this->interesse_cultura = $interesse_cultura;
 
         return $this;
     }
 
-    public function getInteresseGastronomia(): int
+    public function getInteresseGastronomia(): ?int
     {
         return $this->interesse_gastronomia;
     }
 
-    public function setInteresseGastronomia(int $interesse_gastronomia): self
+    public function setInteresseGastronomia(int $interesse_gastronomia): static
     {
         $this->interesse_gastronomia = $interesse_gastronomia;
 
         return $this;
     }
 
-    public function getOrcamentoDiario(): float
+    public function getOrcamentoDiario(): ?float
     {
         return $this->orcamento_diario;
     }
 
-    public function setOrcamentoDiario(float $orcamento_diario): self
+    public function setOrcamentoDiario(float $orcamento_diario): static
     {
         $this->orcamento_diario = $orcamento_diario;
 
         return $this;
     }
 
-    public function getDuracaoViagem(): int
+    public function getDuracaoViagem(): ?int
     {
         return $this->duracao_viagem;
     }
 
-    public function setDuracaoViagem(int $duracao_viagem): self
+    public function setDuracaoViagem(int $duracao_viagem): static
     {
         $this->duracao_viagem = $duracao_viagem;
 
         return $this;
     }
 
-    public function getOutrosInteresses(): String
+    public function getOutrosInteresses(): ?string
     {
         return $this->outros_interesses;
     }
 
-    public function setOutrosInteresses(String $outros_interesses): self
+    public function setOutrosInteresses(string $outros_interesses): static
     {
         $this->outros_interesses = $outros_interesses;
 
         return $this;
     }
-
 }
-
-?>
