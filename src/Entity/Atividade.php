@@ -29,12 +29,13 @@ class Atividade
     #[ORM\Column]
     private ?float $custo_estimado = null;
 
-    public function __construct(String $nome, String $descricao, String $destino, String $categoria, float $custo_estimado){
-        $this -> nome = $nome;
-        $this -> descricao = $descricao;
-        $this -> destino = $destino;
-        $this -> categoria = $categoria;
-        $this -> custo_estimado = $custo_estimado;
+    public function __construct(String $nome, String $descricao, String $destino, String $categoria, float $custo_estimado)
+    {
+        $this->nome = $nome;
+        $this->descricao = $descricao;
+        $this->destino = $destino;
+        $this->categoria = $categoria;
+        $this->custo_estimado = $custo_estimado;
     }
 
     public function getId(): ?int

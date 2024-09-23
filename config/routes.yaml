@@ -1,5 +1,4 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+atividade_show:
+  path: /atividade/{id}
+  controller: App\Controller\AtividadeController::show
+  methods: [GET]

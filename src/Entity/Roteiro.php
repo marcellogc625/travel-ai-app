@@ -15,10 +15,12 @@ class Roteiro
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column]
     #[ORM\OneToOne(targetEntity: Usuario::class)]
     #[ORM\JoinColumn(name: 'id_usuario', referencedColumnName: 'id', nullable: false)]
     private ?int $id_usuario = null;
 
+    #[ORM\Column]
     #[ORM\OneToOne(targetEntity: Destino::class)]
     #[ORM\JoinColumn(name: 'id_destino', referencedColumnName: 'id', nullable: false)]
     private ?int $id_destino = null;
