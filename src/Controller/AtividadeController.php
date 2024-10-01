@@ -8,13 +8,13 @@ use App\Repository\AtividadeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-// Importação de rotas com atributos (Symfony 5.2+)
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/atividade/", name="atividade_show")
+ * @Route("/atividade")
  */
-class AtividadeController extends AbstractController {
+class AtividadeController extends AbstractController
+{
     private AtividadeRepository $atividadeRepository;
 
     public function __construct(AtividadeRepository $atividadeRepository)
@@ -56,11 +56,10 @@ class AtividadeController extends AbstractController {
     }
 
     /**
-     * @Route("/atividade/{id}", name="atividade_show", methods={"GET"})
+     * @Route("/{id}", name="atividade_show", methods={"GET"})
      */
     public function show(Atividade $atividade): Response
     {
-        // Aqui você pode manipular a entidade $atividade
         return $this->render('atividade/show.html.twig', [
             'atividade' => $atividade,
         ]);
@@ -87,11 +86,11 @@ class AtividadeController extends AbstractController {
     }
 
     /**
-     * @Route("/{id}", name="atividade_delete", methods={"POST"})
+     * @Route("/{id}/delete", name="atividade_delete", methods={"POST"})
      */
     public function delete(Request $request, Atividade $atividade): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$atividade->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $atividade->getId(), $request->request->get('_token'))) {
             $this->atividadeRepository->remove($atividade, true);
         }
 
@@ -123,6 +122,4 @@ class AtividadeController extends AbstractController {
             'atividades' => $atividades,
         ]);
     }
-
-    // Adicione outros métodos de busca conforme necessário
 }

@@ -11,7 +11,7 @@ class Atividade
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id_atividade')]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
