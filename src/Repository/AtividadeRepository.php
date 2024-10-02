@@ -10,7 +10,8 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * @extends ServiceEntityRepository<Atividade>
  */
-class AtividadeRepository extends ServiceEntityRepository {
+class AtividadeRepository extends ServiceEntityRepository
+{
     private EntityManagerInterface $entityManager;
 
     // Injetar o EntityManager via construtor
@@ -21,25 +22,25 @@ class AtividadeRepository extends ServiceEntityRepository {
     }
 
     // Método para adicionar um Atividade
-    public function add(Atividade $atividade, bool $flush = false): void {
+    public function add(Atividade $atividade, bool $flush = false): void
+    {
 
         $this->entityManager->persist($atividade);
-        
+
         if ($flush) {
             $this->entityManager->flush();
         }
-
     }
 
     // Método para remover um Atividade
-    public function remove(Atividade $atividade, bool $flush = false): void {
+    public function remove(Atividade $atividade, bool $flush = true): void
+    {
 
-    $this->entityManager->remove($atividade);
+        $this->entityManager->remove($atividade);
 
         if ($flush) {
             $this->entityManager->flush();
         }
-        
     }
 
     /**
@@ -57,7 +58,7 @@ class AtividadeRepository extends ServiceEntityRepository {
             ->getQuery()
             ->getResult();
     }
-    
+
     /**
      * Encontra atividades com base em critérios dinâmicos
      *
@@ -68,35 +69,34 @@ class AtividadeRepository extends ServiceEntityRepository {
     public function findByCriteria(array $criteria): array
     {
         $qb = $this->createQueryBuilder('a');
-        
+
         if (isset($criteria['nome'])) {
             $qb->andWhere('a.nome LIKE :nome')
-               ->setParameter('nome', '%' . $criteria['nome'] . '%');
+                ->setParameter('nome', '%' . $criteria['nome'] . '%');
         }
-        
+
         if (isset($criteria['categoria'])) {
             $qb->andWhere('a.categoria = :categoria')
-               ->setParameter('categoria', $criteria['categoria']);
+                ->setParameter('categoria', $criteria['categoria']);
         }
-        
+
         if (isset($criteria['destino'])) {
             $qb->andWhere('a.destino LIKE :destino')
-               ->setParameter('destino', '%' . $criteria['destino'] . '%');
+                ->setParameter('destino', '%' . $criteria['destino'] . '%');
         }
-        
+
         if (isset($criteria['custo_min'])) {
             $qb->andWhere('a.custo_estimado >= :custo_min')
-               ->setParameter('custo_min', $criteria['custo_min']);
+                ->setParameter('custo_min', $criteria['custo_min']);
         }
-        
+
         if (isset($criteria['custo_max'])) {
             $qb->andWhere('a.custo_estimado <= :custo_max')
-               ->setParameter('custo_max', $criteria['custo_max']);
+                ->setParameter('custo_max', $criteria['custo_max']);
         }
-        
-        return $qb->orderBy('a.nome', 'ASC')
-                  ->getQuery()
-                  ->getResult();
-    }
 
+        return $qb->orderBy('a.nome', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

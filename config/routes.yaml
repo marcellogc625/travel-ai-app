@@ -2,3 +2,20 @@ atividade_show:
   path: /atividade/{id}
   controller: App\Controller\AtividadeController::show
   methods: [GET]
+
+atividade_edit:
+  path: /atividade/{id}/editar
+  controller: App\Controller\AtividadeController::edit
+
+atividade_index:
+  path: /atividades
+  controller: App\Controller\AtividadeController::index
+
+atividade_new:
+  path: /atividade/novo
+  controller: App\Controller\AtividadeController::new
+
+atividade_delete:
+  path: /atividade/{id}/excluir
+  controller: App\Controller\AtividadeController::delete
+  methods: [DELETE]

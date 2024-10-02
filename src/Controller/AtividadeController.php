@@ -86,16 +86,27 @@ class AtividadeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="atividade_delete", methods={"POST"})
+     * @Route("/{id}/excluir", name="atividade_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Atividade $atividade): Response
     {
         if ($this->isCsrfTokenValid('delete' . $atividade->getId(), $request->request->get('_token'))) {
             $this->atividadeRepository->remove($atividade, true);
+
+            // Verifique se a atividade ainda existe após a remoção
+            $verificacao = $this->atividadeRepository->find($atividade->getId());
+            if ($verificacao === null) {
+                // A atividade foi excluída
+                return $this->redirectToRoute('atividade_index');
+            } else {
+                // A atividade ainda existe
+                throw $this->createNotFoundException('Atividade não foi excluída.');
+            }
         }
 
         return $this->redirectToRoute('atividade_index');
     }
+
 
     /**
      * @Route("/buscar/nome", name="atividade_buscar_nome", methods={"GET"})
