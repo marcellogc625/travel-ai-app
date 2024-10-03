@@ -18,4 +18,4 @@ atividade_new:
 atividade_delete:
   path: /atividade/{id}/excluir
   controller: App\Controller\AtividadeController::delete
-  methods: [DELETE]
+  # methods: [DELETE]
