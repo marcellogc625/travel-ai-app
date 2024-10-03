@@ -86,10 +86,11 @@ class AtividadeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/excluir", name="atividade_delete", methods={"DELETE"})
+     * @Route("/{id}/excluir", name="atividade_delete")
      */
     public function delete(Request $request, Atividade $atividade): Response
     {
+        dump($atividade);
         if ($this->isCsrfTokenValid('delete' . $atividade->getId(), $request->request->get('_token'))) {
             $this->atividadeRepository->remove($atividade, true);
 

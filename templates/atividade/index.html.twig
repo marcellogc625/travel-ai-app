@@ -31,7 +31,7 @@
                     <td>
                         <a href="{{ path('atividade_show', {'id': atividade.id}) }}">Ver</a>
                         <a href="{{ path('atividade_edit', {'id': atividade.id}) }}">Editar</a>
-                        <form method="delete" action="{{ path('atividade_delete', {'id': atividade.id}) }}" style="display:inline-block" onsubmit="return confirm('Tem certeza que deseja deletar esta atividade?');">
+                        <form method="post" action="{{ path('atividade_delete', {'id': atividade.id}) }}" style="display:inline-block" onsubmit="return confirm('Tem certeza que deseja deletar esta atividade?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ atividade.id) }}">
                             <input type="hidden" name="_method" value="DELETE"> 
                             <button type="submit">Deletar</button>

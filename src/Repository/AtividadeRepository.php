@@ -40,6 +40,7 @@ class AtividadeRepository extends ServiceEntityRepository
 
         if ($flush) {
             $this->entityManager->flush();
+            var_dump('flush foi executado');
         }
     }
 
