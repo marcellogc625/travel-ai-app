@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Destino{% endblock %}
+
+{% block body %}
+    <h1>Destino</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ destino.id }}</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>{{ destino.nome }}</td>
+            </tr>
+            <tr>
+                <th>Pais</th>
+                <td>{{ destino.pais }}</td>
+            </tr>
+            <tr>
+                <th>Cidade</th>
+                <td>{{ destino.cidade }}</td>
+            </tr>
+            <tr>
+                <th>Descricao</th>
+                <td>{{ destino.descricao }}</td>
+            </tr>
+            <tr>
+                <th>Imagem</th>
+                <td>{{ destino.imagem }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_destino_index') }}">back to list</a>
+
+    <a href="{{ path('app_destino_edit', {'id': destino.id}) }}">edit</a>
+
+    {{ include('destino/_delete_form.html.twig') }}
+{% endblock %}

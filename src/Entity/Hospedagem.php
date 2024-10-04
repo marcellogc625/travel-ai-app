@@ -11,7 +11,7 @@ class Hospedagem
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id_hospedagem')]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
@@ -26,12 +26,7 @@ class Hospedagem
     #[ORM\Column]
     private ?float $custo_por_noite = null;
 
-    public function __construct(String $nome, String $destino, String $tipo, float $custo_por_noite){
-        $this -> nome = $nome;
-        $this -> destino = $destino;
-        $this -> tipo = $tipo;
-        $this -> custo_por_noite = $custo_por_noite;
-    }
+    public function __construct() {}
 
     public function getId(): ?int
     {

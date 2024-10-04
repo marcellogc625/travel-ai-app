@@ -1,37 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Detalhes da Atividade{% endblock %}
+{% block title %}Atividade{% endblock %}
 
 {% block body %}
-    <h1>Detalhes da Atividade</h1>
+    <h1>Atividade</h1>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <td>{{ atividade.id }}</td>
-        </tr>
-        <tr>
-            <th>Nome</th>
-            <td>{{ atividade.nome }}</td>
-        </tr>
-        <tr>
-            <th>Descrição</th>
-            <td>{{ atividade.descricao }}</td>
-        </tr>
-        <tr>
-            <th>Destino</th>
-            <td>{{ atividade.destino }}</td>
-        </tr>
-        <tr>
-            <th>Categoria</th>
-            <td>{{ atividade.categoria }}</td>
-        </tr>
-        <tr>
-            <th>Custo Estimado</th>
-            <td>{{ atividade.custoEstimado }}</td>
-        </tr>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ atividade.id }}</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>{{ atividade.nome }}</td>
+            </tr>
+            <tr>
+                <th>Descricao</th>
+                <td>{{ atividade.descricao }}</td>
+            </tr>
+            <tr>
+                <th>Destino</th>
+                <td>{{ atividade.destino }}</td>
+            </tr>
+            <tr>
+                <th>Categoria</th>
+                <td>{{ atividade.categoria }}</td>
+            </tr>
+            <tr>
+                <th>Custo_estimado</th>
+                <td>{{ atividade.custoEstimado }}</td>
+            </tr>
+        </tbody>
     </table>
 
-    <a href="{{ path('atividade_edit', {'id': atividade.id}) }}">Editar</a>
-    <a href="{{ path('atividade_index') }}">Voltar à lista</a>
+    <a href="{{ path('app_atividade_index') }}">back to list</a>
+
+    <a href="{{ path('app_atividade_edit', {'id': atividade.id}) }}">edit</a>
+
+    {{ include('atividade/_delete_form.html.twig') }}
 {% endblock %}

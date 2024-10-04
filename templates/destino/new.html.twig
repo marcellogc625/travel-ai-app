@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Destino{% endblock %}
+
+{% block body %}
+    <h1>Create new Destino</h1>
+
+    {{ include('destino/_form.html.twig') }}
+
+    <a href="{{ path('app_destino_index') }}">back to list</a>
+{% endblock %}

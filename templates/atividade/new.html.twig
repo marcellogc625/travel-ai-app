@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Criar Nova Atividade{% endblock %}
+{% block title %}New Atividade{% endblock %}
 
 {% block body %}
-    <h1>Criar Nova Atividade</h1>
+    <h1>Create new Atividade</h1>
 
     {{ include('atividade/_form.html.twig') }}
 
-    <a href="{{ path('atividade_index') }}">Voltar à lista</a>
+    <a href="{{ path('app_atividade_index') }}">back to list</a>
 {% endblock %}

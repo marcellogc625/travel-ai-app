@@ -12,7 +12,7 @@ class Usuario
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id_usuario')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -31,13 +31,7 @@ class Usuario
     private ?\DateTimeImmutable $data_nascimento = null;
 
     // Construtor
-    public function __construct(string $nome, string $sobrenome, string $email, string $senha, \DateTimeImmutable $data_nascimento){
-        $this->nome = $nome;
-        $this->sobrenome = $sobrenome;
-        $this->email = $email;
-        $this->senha = $senha;
-        $this->data_nascimento = $data_nascimento;
-    }
+    public function __construct() {}
 
     public function getId(): ?int
     {

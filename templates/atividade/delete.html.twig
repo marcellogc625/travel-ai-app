@@ -1,5 +1,0 @@
-<form action="{{ path('atividade_delete', { 'id': atividade.id }) }}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir?');">
-    <input type="hidden" name="_method" value="DELETE">
-    {{ csrf_field() }} 
-    <button type="submit">Excluir</button>
-</form>

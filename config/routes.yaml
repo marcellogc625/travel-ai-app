@@ -1,21 +1,131 @@
-atividade_show:
-  path: /atividade/{id}
-  controller: App\Controller\AtividadeController::show
-  methods: [GET]
+# Atividade #
 
-atividade_edit:
-  path: /atividade/{id}/editar
-  controller: App\Controller\AtividadeController::edit
-
-atividade_index:
-  path: /atividades
+app_atividade_index:
+  path: /atividade
   controller: App\Controller\AtividadeController::index
 
-atividade_new:
-  path: /atividade/novo
+app_atividade_new:
+  path: /atividade/new
   controller: App\Controller\AtividadeController::new
 
-atividade_delete:
-  path: /atividade/{id}/excluir
+app_atividade_show:
+  path: /atividade/{id}
+  controller: App\Controller\AtividadeController::show
+
+app_atividade_edit:
+  path: /atividade/{id}/edit
+  controller: App\Controller\AtividadeController::edit
+
+app_atividade_delete:
+  path: /atividade/{id}
   controller: App\Controller\AtividadeController::delete
-  # methods: [DELETE]
+
+# Roteiro #
+
+app_roteiro_index:
+  path: /roteiro
+  controller: App\Controller\RoteiroController::index
+
+app_roteiro_new:
+  path: /roteiro/new
+  controller: App\Controller\RoteiroController::new
+
+app_roteiro_show:
+  path: /roteiro/{id}
+  controller: App\Controller\RoteiroController::show
+
+app_roteiro_edit:
+  path: /roteiro/{id}/edit
+  controller: App\Controller\RoteiroController::edit
+
+app_roteiro_delete:
+  path: /roteiro/{id}
+  controller: App\Controller\RoteiroController::delete
+
+# Usuario #
+
+app_usuario_index:
+  path: /usuario
+  controller: App\Controller\UsuarioController::index
+
+app_usuario_new:
+  path: /usuario/new
+  controller: App\Controller\UsuarioController::new
+
+app_usuario_show:
+  path: /usuario/{id}
+  controller: App\Controller\UsuarioController::show
+
+app_usuario_edit:
+  path: /usuario/{id}/edit
+  controller: App\Controller\UsuarioController::edit
+
+app_usuario_delete:
+  path: /usuario/{id}
+  controller: App\Controller\UsuarioController::delete
+
+# Perfil #
+
+app_perfil_index:
+  path: /perfil
+  controller: App\Controller\PerfilController::index
+
+app_perfil_new:
+  path: /perfil/new
+  controller: App\Controller\PerfilController::new
+
+app_perfil_show:
+  path: /perfil/{id}
+  controller: App\Controller\PerfilController::show
+
+app_perfil_edit:
+  path: /perfil/{id}/edit
+  controller: App\Controller\PerfilController::edit
+
+app_perfil_delete:
+  path: /perfil/{id}
+  controller: App\Controller\PerfilController::delete
+
+# Hospedagem #
+
+app_hospedagem_index:
+  path: /hospedagem
+  controller: App\Controller\HospedagemController::index
+
+app_hospedagem_new:
+  path: /hospedagem/new
+  controller: App\Controller\HospedagemController::new
+
+app_hospedagem_show:
+  path: /hospedagem/{id}
+  controller: App\Controller\HospedagemController::show
+
+app_hospedagem_edit:
+  path: /hospedagem/{id}/edit
+  controller: App\Controller\HospedagemController::edit
+
+app_hospedagem_delete:
+  path: /hospedagem/{id}
+  controller: App\Controller\HospedagemController::delete
+
+# Destino #
+
+app_destino_index:
+  path: /destino
+  controller: App\Controller\DestinoController::index
+
+app_destino_new:
+  path: /destino/new
+  controller: App\Controller\DestinoController::new
+
+app_destino_show:
+  path: /destino/{id}
+  controller: App\Controller\DestinoController::show
+
+app_destino_edit:
+  path: /destino/{id}/edit
+  controller: App\Controller\DestinoController::edit
+
+app_destino_delete:
+  path: /destino/{id}
+  controller: App\Controller\DestinoController::delete

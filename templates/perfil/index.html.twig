@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Perfil index{% endblock %}
+
+{% block body %}
+    <h1>Perfil index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Id_usuario</th>
+                <th>Interesse_aventura</th>
+                <th>Interesse_cultura</th>
+                <th>Interesse_gastronomia</th>
+                <th>Orcamento_diario</th>
+                <th>Duracao_viagem</th>
+                <th>Outros_interesses</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for perfil in perfils %}
+            <tr>
+                <td>{{ perfil.id }}</td>
+                <td>{{ perfil.idUsuario }}</td>
+                <td>{{ perfil.interesseAventura }}</td>
+                <td>{{ perfil.interesseCultura }}</td>
+                <td>{{ perfil.interesseGastronomia }}</td>
+                <td>{{ perfil.orcamentoDiario }}</td>
+                <td>{{ perfil.duracaoViagem }}</td>
+                <td>{{ perfil.outrosInteresses }}</td>
+                <td>
+                    <a href="{{ path('app_perfil_show', {'id': perfil.id}) }}">show</a>
+                    <a href="{{ path('app_perfil_edit', {'id': perfil.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_perfil_new') }}">Create new</a>
+{% endblock %}

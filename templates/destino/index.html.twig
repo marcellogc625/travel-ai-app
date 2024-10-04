@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Destino index{% endblock %}
+
+{% block body %}
+    <h1>Destino index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Pais</th>
+                <th>Cidade</th>
+                <th>Descricao</th>
+                <th>Imagem</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for destino in destinos %}
+            <tr>
+                <td>{{ destino.id }}</td>
+                <td>{{ destino.nome }}</td>
+                <td>{{ destino.pais }}</td>
+                <td>{{ destino.cidade }}</td>
+                <td>{{ destino.descricao }}</td>
+                <td>{{ destino.imagem }}</td>
+                <td>
+                    <a href="{{ path('app_destino_show', {'id': destino.id}) }}">show</a>
+                    <a href="{{ path('app_destino_edit', {'id': destino.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_destino_new') }}">Create new</a>
+{% endblock %}

@@ -7,7 +7,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class RoteiroRepository extends ServiceEntityRepository {
+class RoteiroRepository extends ServiceEntityRepository
+{
     private EntityManagerInterface $entityManager;
 
     // Injetar o EntityManager via construtor
@@ -21,13 +22,13 @@ class RoteiroRepository extends ServiceEntityRepository {
     public function add(Roteiro $roteiro, bool $flush = false): void
     {
         $this->entityManager->persist($roteiro);
-        
+
         if ($flush) {
             $this->entityManager->flush();
         }
     }
 
-        /**
+    /**
      * Remove um Roteiro
      *
      * @param Roteiro $roteiro
@@ -36,7 +37,7 @@ class RoteiroRepository extends ServiceEntityRepository {
     public function remove(Roteiro $roteiro, bool $flush = false): void
     {
         $this->entityManager->remove($roteiro);
-        
+
         if ($flush) {
             $this->entityManager->flush();
         }
@@ -89,5 +90,4 @@ class RoteiroRepository extends ServiceEntityRepository {
             ->getQuery()
             ->getResult();
     }
-
 }

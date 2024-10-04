@@ -7,12 +7,12 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RoteiroRepository::class)]
-#[ORM\Table(name:'roteiros')]
+#[ORM\Table(name: 'roteiros')]
 class Roteiro
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id_roteiro')]
     private ?int $id = null;
 
     #[ORM\Column]
@@ -34,12 +34,13 @@ class Roteiro
     #[ORM\Column]
     private array $dias = [];
 
-    public function __construct(int $id_usuario, int $id_destino, DateTimeImmutable $data_criacao, String $descricao, array $dias){
-        $this -> id_usuario = $id_usuario;
-        $this -> id_destino = $id_destino;
-        $this -> data_criacao = $data_criacao;
-        $this -> descricao = $descricao;
-        $this -> dias = $dias;    
+    public function __construct(int $id_usuario, int $id_destino, DateTimeImmutable $data_criacao, String $descricao, array $dias)
+    {
+        $this->id_usuario = $id_usuario;
+        $this->id_destino = $id_destino;
+        $this->data_criacao = $data_criacao;
+        $this->descricao = $descricao;
+        $this->dias = $dias;
     }
 
     public function getId(): ?int

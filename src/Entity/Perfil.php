@@ -11,7 +11,7 @@ class Perfil
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id_perfil')]
     private ?int $id = null;
 
     #[ORM\Column]
@@ -37,15 +37,7 @@ class Perfil
     #[ORM\Column(length: 255)]
     private ?string $outros_interesses = null;
 
-    public function __construct(int $id_usuario, int $interesse_aventura, int $interesse_cultura, int $interesse_gastronomia, float $orcamento_diario, int $duracao_viagem, String $outros_interesses){
-        $this -> id_usuario = $id_usuario;
-        $this -> interesse_aventura = $interesse_aventura;
-        $this -> interesse_cultura = $interesse_cultura;
-        $this -> interesse_gastronomia = $interesse_gastronomia;
-        $this -> orcamento_diario = $orcamento_diario;
-        $this -> duracao_viagem = $duracao_viagem;
-        $this -> outros_interesses = $outros_interesses;
-    }
+    public function __construct() {}
 
     public function getId(): ?int
     {

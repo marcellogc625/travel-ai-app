@@ -11,7 +11,7 @@ class Destino
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id_destino')]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
@@ -29,13 +29,7 @@ class Destino
     #[ORM\Column(length: 255)]
     private ?string $imagem = null;
 
-    public function __construct(String $nome, String $pais, String $cidade, String $descricao, String $imagem){
-        $this -> nome = $nome;
-        $this -> pais = $pais;
-        $this -> cidade = $cidade;
-        $this -> descricao = $descricao;
-        $this -> imagem = $imagem;
-    }
+    public function __construct() {}
 
     public function getId(): ?int
     {

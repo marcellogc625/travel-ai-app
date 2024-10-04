@@ -1,48 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lista de Atividades{% endblock %}
+{% block title %}Atividade index{% endblock %}
 
 {% block body %}
-    <h1>Atividades</h1>
+    <h1>Atividade index</h1>
 
-    <a href="{{ path('atividade_new') }}">Criar nova Atividade</a>
-
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Id</th>
                 <th>Nome</th>
-                <th>Descrição</th>
+                <th>Descricao</th>
                 <th>Destino</th>
                 <th>Categoria</th>
-                <th>Custo Estimado</th>
-                <th>Ações</th>
+                <th>Custo_estimado</th>
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for atividade in atividades %}
-                <tr>
-                    <td>{{ atividade.id }}</td>
-                    <td>{{ atividade.nome }}</td>
-                    <td>{{ atividade.descricao }}</td>
-                    <td>{{ atividade.destino }}</td>
-                    <td>{{ atividade.categoria }}</td>
-                    <td>{{ atividade.custoEstimado }}</td>
-                    <td>
-                        <a href="{{ path('atividade_show', {'id': atividade.id}) }}">Ver</a>
-                        <a href="{{ path('atividade_edit', {'id': atividade.id}) }}">Editar</a>
-                        <form method="post" action="{{ path('atividade_delete', {'id': atividade.id}) }}" style="display:inline-block" onsubmit="return confirm('Tem certeza que deseja deletar esta atividade?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ atividade.id) }}">
-                            <input type="hidden" name="_method" value="DELETE"> 
-                            <button type="submit">Deletar</button>
-                        </form>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="7">Nenhuma atividade encontrada.</td>
-                </tr>
-            {% endfor %}
+        {% for atividade in atividades %}
+            <tr>
+                <td>{{ atividade.id }}</td>
+                <td>{{ atividade.nome }}</td>
+                <td>{{ atividade.descricao }}</td>
+                <td>{{ atividade.destino }}</td>
+                <td>{{ atividade.categoria }}</td>
+                <td>{{ atividade.custoEstimado }}</td>
+                <td>
+                    <a href="{{ path('app_atividade_show', {'id': atividade.id}) }}">show</a>
+                    <a href="{{ path('app_atividade_edit', {'id': atividade.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+
+    <a href="{{ path('app_atividade_new') }}">Create new</a>
 {% endblock %}

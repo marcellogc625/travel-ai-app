@@ -3,140 +3,79 @@
 namespace App\Controller;
 
 use App\Entity\Perfil;
+use App\Form\PerfilType;
 use App\Repository\PerfilRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-/**
- * @Route("/perfis")
- */
-class PerfilController extends AbstractController
+#[Route('/perfil')]
+final class PerfilController extends AbstractController
 {
-    private PerfilRepository $perfilRepository;
-
-    public function __construct(PerfilRepository $perfilRepository)
+    #[Route(name: 'app_perfil_index', methods: ['GET'])]
+    public function index(PerfilRepository $perfilRepository): Response
     {
-        $this->perfilRepository = $perfilRepository;
+        return $this->render('perfil/index.html.twig', [
+            'perfils' => $perfilRepository->findAll(),
+        ]);
     }
 
-    /**
-     * @Route("/", name="perfil_index", methods={"GET"})
-     */
-    public function index(): Response
+    #[Route('/new', name: 'app_perfil_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $perfis = $this->perfilRepository->findAll();
-        return $this->json($perfis);
-    }
+        $perfil = new Perfil();
+        $form = $this->createForm(PerfilType::class, $perfil);
+        $form->handleRequest($request);
 
-    /**
-     * @Route("/new", name="perfil_new", methods={"POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $data = json_decode($request->getContent(), true);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($perfil);
+            $entityManager->flush();
 
-        $perfil = new Perfil(
-            $data['id_usuario'],
-            $data['interesse_aventura'],
-            $data['interesse_cultura'],
-            $data['interesse_gastronomia'],
-            $data['orcamento_diario'],
-            $data['duracao_viagem'],
-            $data['outros_interesses']
-        );
+            return $this->redirectToRoute('app_perfil_index', [], Response::HTTP_SEE_OTHER);
+        }
 
-        $this->perfilRepository->add($perfil, true);
-
-        return $this->json([
-            'status' => 'Perfil criado com sucesso!',
+        return $this->render('perfil/new.html.twig', [
             'perfil' => $perfil,
-        ], Response::HTTP_CREATED);
+            'form' => $form,
+        ]);
     }
 
-    /**
-     * @Route("/{id}", name="perfil_show", methods={"GET"})
-     */
-    public function show(int $id): Response
+    #[Route('/{id}', name: 'app_perfil_show', methods: ['GET'])]
+    public function show(Perfil $perfil): Response
     {
-        $perfil = $this->perfilRepository->find($id);
-
-        if (!$perfil) {
-            return $this->json(['error' => 'Perfil não encontrado.'], Response::HTTP_NOT_FOUND);
-        }
-
-        return $this->json($perfil);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="perfil_edit", methods={"PUT"})
-     */
-    public function edit(int $id, Request $request): Response
-    {
-        $perfil = $this->perfilRepository->find($id);
-
-        if (!$perfil) {
-            return $this->json(['error' => 'Perfil não encontrado.'], Response::HTTP_NOT_FOUND);
-        }
-
-        $data = json_decode($request->getContent(), true);
-
-        if (isset($data['id_usuario'])) {
-            $perfil->setIdUsuario($data['id_usuario']);
-        }
-        if (isset($data['interesse_aventura'])) {
-            $perfil->setInteresseAventura($data['interesse_aventura']);
-        }
-        if (isset($data['interesse_cultura'])) {
-            $perfil->setInteresseCultura($data['interesse_cultura']);
-        }
-        if (isset($data['interesse_gastronomia'])) {
-            $perfil->setInteresseGastronomia($data['interesse_gastronomia']);
-        }
-        if (isset($data['orcamento_diario'])) {
-            $perfil->setOrcamentoDiario($data['orcamento_diario']);
-        }
-        if (isset($data['duracao_viagem'])) {
-            $perfil->setDuracaoViagem($data['duracao_viagem']);
-        }
-        if (isset($data['outros_interesses'])) {
-            $perfil->setOutrosInteresses($data['outros_interesses']);
-        }
-
-        $this->perfilRepository->add($perfil, true);
-
-        return $this->json([
-            'status' => 'Perfil atualizado com sucesso!',
+        return $this->render('perfil/show.html.twig', [
             'perfil' => $perfil,
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="perfil_delete", methods={"DELETE"})
-     */
-    public function delete(int $id): Response
+    #[Route('/{id}/edit', name: 'app_perfil_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Perfil $perfil, EntityManagerInterface $entityManager): Response
     {
-        $perfil = $this->perfilRepository->find($id);
+        $form = $this->createForm(PerfilType::class, $perfil);
+        $form->handleRequest($request);
 
-        if (!$perfil) {
-            return $this->json(['error' => 'Perfil não encontrado.'], Response::HTTP_NOT_FOUND);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_perfil_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        $this->perfilRepository->remove($perfil, true);
-
-        return $this->json(['status' => 'Perfil removido com sucesso!']);
+        return $this->render('perfil/edit.html.twig', [
+            'perfil' => $perfil,
+            'form' => $form,
+        ]);
     }
 
-    /**
-     * @Route("/search", name="perfil_search", methods={"POST"})
-     */
-    public function search(Request $request): Response
+    #[Route('/{id}', name: 'app_perfil_delete', methods: ['POST'])]
+    public function delete(Request $request, Perfil $perfil, EntityManagerInterface $entityManager): Response
     {
-        $criteria = json_decode($request->getContent(), true);
+        if ($this->isCsrfTokenValid('delete' . $perfil->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($perfil);
+            $entityManager->flush();
+        }
 
-        $perfis = $this->perfilRepository->findByCriteria($criteria);
-
-        return $this->json($perfis);
+        return $this->redirectToRoute('app_perfil_index', [], Response::HTTP_SEE_OTHER);
     }
 }
