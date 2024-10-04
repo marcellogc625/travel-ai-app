@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\RoteiroRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RoteiroRepository::class)]
@@ -34,14 +33,7 @@ class Roteiro
     #[ORM\Column]
     private array $dias = [];
 
-    public function __construct(int $id_usuario, int $id_destino, DateTimeImmutable $data_criacao, String $descricao, array $dias)
-    {
-        $this->id_usuario = $id_usuario;
-        $this->id_destino = $id_destino;
-        $this->data_criacao = $data_criacao;
-        $this->descricao = $descricao;
-        $this->dias = $dias;
-    }
+    public function __construct() {}
 
     public function getId(): ?int
     {
